@@ -1,0 +1,27 @@
+
+
+
+<div class="cardInformation">
+    <h3>Thank-you for submitting credit card details!</h3>
+
+    <p>Please find the information submitted below</p>
+    <dl>
+        <dt>Card Number :</dt>
+        <dd>{{formData['creditCardNumber']!.cardNumber}}</dd>
+
+        <dt>Card Type :</dt>
+        <dd>{{formData['creditCardNumber']!.typeOfCard}}</dd>
+
+        <dt>Card Holder Name :</dt>
+        <dd>{{formData['creditCardInfo']!.cardHolderName}}</dd>
+
+        <dt>Valid From :</dt>
+        <dd>{{formData['creditCardInfo']?.validFrom?.validFromMonth}}/{{formData['creditCardInfo']?.validFrom?.validFromYear}}</dd>
+
+        <dt>Valid Till :</dt>
+        <dd>{{formData['creditCardInfo']?.validThrough?.validThroughMonth}}/{{formData['creditCardInfo']?.validThrough?.validThroughYear}}</dd>
+
+        <dt>CVV :</dt>
+        <dd>{{formData['creditCardInfo']!.cvv}}</dd>
+    </dl>
+</div>

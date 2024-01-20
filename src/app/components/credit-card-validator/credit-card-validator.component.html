@@ -1,0 +1,69 @@
+
+<form (ngSubmit)="submit()" [formGroup]="creditCardDetail">
+    <div class="credit-card-container">
+        <h2>Enter Credit Card Details</h2>
+        <div class="credit-card-number" *ngIf="step === 1" formGroupName="creditCardNumber">
+            <input type="text" id="cardNumber" formControlName="cardNumber" (input)="identifyCardType()"
+                placeholder="Enter Credit Card Number" />
+    
+            <p>Credit Card Options: </p>
+            <div class="credit-card-images">
+                <button id="visa" [disabled]="cardType!=='' && cardType !=='Visa'" type="button">
+                    <img src="../../../assets/visa.png" alt="" height=" 100px" width="200px">
+                </button>
+                <button id="mastercard" [disabled]="cardType!=='' && cardType !=='Mastercard'" type="button">
+                    <img src="../../../assets/mastercard.png" alt="" height=" 100px" width="200px">
+                </button>
+                <button id="americanexpress" [disabled]="cardType!=='' && cardType !=='AmericanExpress'" type="button">
+                    <img src="../../../assets/american.png" alt="" height=" 100px" width="200px">
+                </button>
+            </div>
+        </div>
+    
+        <div class="creditCardInfo" *ngIf="step === 2" formGroupName="creditCardInfo">
+            <div>
+                <input type="text" id="cardHolderName"
+                    placeholder="Card Holder Name" formControlName="cardHolderName"/>
+            </div>
+            <div formGroupName="validFrom">
+                <label for="validFrom">Valid From :</label>
+                <select id="validFrom" name="validFromMonth" formControlName="validFromMonth">
+                    <option [ngValue]="null" [selected]="true">Select Month</option>
+                    <option *ngFor="let month of months" value="{{month}}">{{month}}</option>
+                </select>
+                <select name="validFromYear" formControlName="validFromYear">
+                    <option [ngValue]="null" [selected]="true">Select Year</option>
+                    <option *ngFor="let year of years" value="{{year}}">{{year}}</option>
+                </select>
+            </div>
+            <div formGroupName="validThrough">
+                <label for="validThrough">Valid Through :</label>
+                <select id="validThrough" name="validThroughMonth" formControlName="validThroughMonth">
+                    <option [ngValue]="null" [selected]="true">Select Month</option>
+                    <option *ngFor="let month of months" value="{{month}}">{{month}}</option>
+                </select>
+                <select name="validThroughYear" formControlName="validThroughYear">
+                    <option [ngValue]="null" [selected]="true">Select Year</option>
+                    <option *ngFor="let year of years" value="{{year}}">{{year}}</option>
+                </select>
+            </div>
+            <div>
+                <input type="text" id="cvv" placeholder="cvv" [maxLength]="3" formControlName="cvv"/>
+            </div>
+            
+            <!-- <p>Valid From : {{validFromMonth}} {{validFromYear}}</p>
+            <p>Valid Through : {{validThroughMonth}} {{validThroughYear}}</p> -->
+        </div>
+        <div class="buttons">
+            <button class="nextBtn" (click)="nextStep()" *ngIf="step===1" [disabled]="!isValidCard">Next</button>
+            <button class="previousBtn" (click)="previousStep()" *ngIf="step==2">Previous</button>
+            <button class="submitBtn" *ngIf="step===2">Submit</button>
+        </div>
+    </div>
+    
+    <div *ngIf="step === 3">
+        <app-thank-you></app-thank-you>
+    </div>
+    
+</form>
+<br/>
